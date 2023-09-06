@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { initApp } from './server.mjs';
 // configurations
-const port = process.env.PORT ?? 4444;
+const port = process.env.PORT ?? 3000;
 const mongoUrl = process.env.MONGO_URL ?? 'mongodb://localhost:27017/snake';
 console.log(`MongoDB URL: ${mongoUrl}`);
 
