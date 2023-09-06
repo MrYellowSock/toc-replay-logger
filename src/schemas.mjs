@@ -25,14 +25,13 @@ const roomCreationSchema = {
 	properties: {
 		users: {
 			type: 'array',
-			$ref: 'user',
+			items: { $ref: 'user' }
 		},
 		gameMap: { $ref: 'gameMap' },
-		status: { type: 'string', enum: ['started', 'finished'] },
 		startedAt: { type: 'string' },
 		roomId: { type: 'number' },
 	},
-	required: ['users', 'gameMap', 'status', 'startedAt', 'roomId'],
+	required: ['users', 'gameMap', 'startedAt', 'roomId'],
 }
 
 const roomUpdateSchema = {
