@@ -1,7 +1,7 @@
 // imports
 import cors from 'cors';
 import express from 'express';
-import { validateRoomCreation, validateRoomUpdate } from './schemas.mjs';
+import { validateRoomCreation, validateRoomRead, validateRoomUpdate } from './schemas.mjs';
 import { MongoClient } from 'mongodb';
 
 /**
@@ -64,14 +64,36 @@ export async function initApp(mongoClient, port) {
 
 	});
 
+	app.get('/replay/progress', async (req, res) => {
+		const { limit, offset } = req.query;
+		const readParam = {
+			limit: parseInt(limit ?? 10),
+			offset: parseInt(offset ?? 0),
+		}
+
+		const roomValidation = validateRoomRead(readParam);
+		if (!roomValidation) {
+			return res.status(400).json({ error: validateRoomRead.errors });
+		}
+		else {
+			const result = await collectionReplay.find().skip(readParam.offset).limit(readParam.limit).toArray();
+			return res.json(result);
+		}
+	});
 	app.get('/replay/progress/:roomId', async (req, res) => {
 		const { roomId } = req.params;
+		// validate
+		const roomValidation = validateRoomRead(req.params);
+		if (!roomValidation) {
+			return res.status(400).json({ error: validateRoomRead.errors });
+		}
+
 		let result = await collectionReplay.findOne({ roomId: parseInt(roomId) })
 		if (!result) {
 			return res.status(404).json({ error: 'Room not found' });
 		}
 		else {
-			res.json(result);
+			return res.json(result);
 		}
 	});
 	const server = app.listen(port, () => {
