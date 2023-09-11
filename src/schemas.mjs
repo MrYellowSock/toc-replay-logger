@@ -33,13 +33,23 @@ const roomCreationSchema = {
 	},
 	required: ['users', 'gameMap', 'startedAt', 'roomId'],
 }
+const progressSchema = {
+	$id: 'progress',
+	type: 'object',
+	properties: {
+		walkDistance: { type: 'array', items: { type: 'number' } },
+		reward: { type: 'array', items: { type: 'number' } },
+	},
+	required: ['walkDistance', 'reward']
+}
+
 
 const roomUpdateSchema = {
 	$id: 'roomUpdate',
 	type: 'object',
 	properties: {
 		roomId: { type: 'number' },
-		progress: { type: 'string' }
+		progress: { $ref: 'progress' },
 	},
 	required: ['roomId'],
 }
@@ -63,6 +73,7 @@ const roomReadSchema = {
 }
 
 const ajvInstance = new ajv();
+ajvInstance.addSchema(progressSchema);
 ajvInstance.addSchema(userSchema);
 ajvInstance.addSchema(gameMapSchema);
 ajvInstance.addSchema(roomCreationSchema);

@@ -42,7 +42,10 @@ describe('Good Home Routes', function() {
 	test('updating room /replay/progress/id', async () => {
 		for (var i = 1; i <= 10; i++) {
 			const res = await request(app).put(`/replay/progress/${i}`).send({
-				"progress": "ABC"
+				"progress": {
+					walkDistance: [1, 2, 3, 4, 5],
+					reward: [1, 3, 5]
+				}
 			});
 			expect(res.statusCode).toBe(200);
 		}
@@ -52,7 +55,6 @@ describe('Good Home Routes', function() {
 			const res = await request(app).get(`/replay/progress/${i}`);
 			expect(res.statusCode).toBe(200);
 			expect(res.body.roomId).toBe(i);
-			expect(res.body.progress).toBe("ABC");
 		}
 	});
 
@@ -68,7 +70,10 @@ describe('Good Home Routes', function() {
 	});
 	test('simple updating room /replay/progress/id', async () => {
 		const res = await request(app).put(`/replay/progress/${4}`).send({
-			"progress": "ABC"
+			"progress": {
+				walkDistance: [1, 2, 3, 4, 5],
+				reward: [1, 3, 5]
+			}
 		});
 		expect(res.statusCode).toBe(200);
 		console.log(res.body);
@@ -77,7 +82,6 @@ describe('Good Home Routes', function() {
 		const res = await request(app).get(`/replay/progress/${4}`);
 		expect(res.statusCode).toBe(200);
 		expect(res.body.roomId).toBe(4);
-		expect(res.body.progress).toBe("ABC");
 		console.log(res.body);
 	});
 

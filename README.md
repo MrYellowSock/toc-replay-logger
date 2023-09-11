@@ -41,7 +41,7 @@ fetch(`YOUR_API_ENDPOINT/replay/progress/${i}`, {
 	'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-	"progress": "ABC"
+	"progress":{ "walkDistance":[70,101],"reward":[5,3,5,3,5,3,5,3,5,3] } 
   })
 })
 .then(response => response.json())
@@ -70,7 +70,7 @@ fetch(`YOUR_API_ENDPOINT/replay/progress/${i}`, {
   "gameMap": { "name": "MAP69" },
   "startedAt": "2023-09-07T13:02:41.867Z",
   "roomId": 4,
-  "progress": "ABC"
+  "progress":{ "walkDistance":[70,101],"reward":[5,3,5,3,5,3,5,3,5,3] }  
 }
 ```
 
@@ -97,7 +97,7 @@ fetch(`YOUR_API_ENDPOINT/replay/progress?limit=${limit}&offset=${offset}`, {
 	  "gameMap": { "name": "MAP69" },
 	  "startedAt": "2023-09-07T13:02:41.867Z",
 	  "roomId": 4,
-	  "progress": "ABC"
+	  "progress": { "walkDistance":[70,101],"reward":[5,3,5,3,5,3,5,3,5,3] }
 	},
 	{
 	  "_id": "64f9c9f1434c737c61d006c5",
@@ -105,7 +105,7 @@ fetch(`YOUR_API_ENDPOINT/replay/progress?limit=${limit}&offset=${offset}`, {
 	  "gameMap": { "name": "MAP69" },
 	  "startedAt": "2023-09-07T13:02:41.867Z",
 	  "roomId": 5,
-	  "progress": "ABC"
+	  "progress": { "walkDistance":[70,101],"reward":[5,3,5,3,5,3,5,3,5,3] }
 	}
 ]
 
