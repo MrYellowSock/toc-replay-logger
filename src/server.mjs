@@ -8,7 +8,7 @@ import { MongoClient } from 'mongodb';
 	@param {MongoClient} mongoClient
 	@param {number} port
 */
-export async function initApp(mongoClient, port) {
+export async function initApp(mongoClient, port, staticDir) {
 	// drivers
 	const app = express();
 	const db = mongoClient.db('snake');
@@ -22,7 +22,7 @@ export async function initApp(mongoClient, port) {
 	app.use(cors())
 
 	//use static files
-	app.use(express.static('./public'));
+	app.use(express.static(staticDir));
 	app.post('/replay/create', async (req, res) => {
 		const latestRoom = await collectionReplay.find().sort({ roomId: -1 }).limit(1).toArray();
 		const newRoomId = (latestRoom[0]?.roomId ?? 0) + 1;

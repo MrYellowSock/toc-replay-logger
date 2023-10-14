@@ -1,0 +1,21 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./db:/data/db
+
+  toc-replay-logger:
+    environment:
+      - STATIC_DIR=/srv/
+      - PORT=${PORT:-3000}
+      - MONGO_URL=mongodb://mongo:27017/snake  # Adjust the URL and database name as needed
+    container_name: toc-replay-logger
+    build: .
+    links:
+      - mongo
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    volumes:
+      - ${STATIC_DIR:-./public/}:/srv/
