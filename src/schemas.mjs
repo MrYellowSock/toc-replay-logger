@@ -33,15 +33,6 @@ const roomCreationSchema = {
 	},
 	required: ['users', 'gameMap', 'startedAt', 'roomId'],
 }
-const progressSchema = {
-	$id: 'progress',
-	type: 'object',
-	properties: {
-		walkDistance: { type: 'array', items: { type: 'number' } },
-		reward: { type: 'array', items: { type: 'number' } },
-	},
-	required: ['walkDistance', 'reward']
-}
 
 
 const roomUpdateSchema = {
@@ -49,7 +40,7 @@ const roomUpdateSchema = {
 	type: 'object',
 	properties: {
 		roomId: { type: 'number' },
-		progress: { $ref: 'progress' },
+		progress: {},
 	},
 	required: ['roomId'],
 }
