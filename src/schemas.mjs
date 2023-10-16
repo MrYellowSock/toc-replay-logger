@@ -64,7 +64,6 @@ const roomReadSchema = {
 }
 
 const ajvInstance = new ajv();
-ajvInstance.addSchema(progressSchema);
 ajvInstance.addSchema(userSchema);
 ajvInstance.addSchema(gameMapSchema);
 ajvInstance.addSchema(roomCreationSchema);
