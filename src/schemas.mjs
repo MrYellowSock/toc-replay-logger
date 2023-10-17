@@ -5,8 +5,9 @@ const userSchema = {
 	type: 'object',
 	properties: {
 		name: { type: 'string', minLength: 1 },
+		color: { type: 'string', minLength: 1 },
 	},
-	required: ['name'],
+	required: ['name', 'color'],
 }
 
 const gameMapSchema = {
